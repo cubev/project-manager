@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Manager
+
+A feature-rich project management application built with Next.js 16, featuring task management with kanban boards, calendar scheduling, project tracking, and a polished dark-themed UI.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8)
+
+## Features
+
+### Dashboard
+- Overview stats (total tasks, in-progress, completed, overdue)
+- Recent activity feed
+- Quick action buttons
+- Project progress summary
+
+### Task Management
+- **List view** with sorting and filtering by status, priority, and project
+- **Kanban board** with drag-and-drop between columns (Todo, In Progress, In Review, Done)
+- Task creation and editing with title, description, priority, due date, project, and tags
+- Detail panel with full task information
+- Priority levels: Urgent, High, Medium, Low
+- Overdue task indicators
+
+### Calendar
+- **Monthly view** with event pills on each day
+- **Weekly view** with time-slot grid
+- Event creation and management
+- Color-coded events by type
+- Mini calendar sidebar for quick navigation
+
+### Projects
+- Project cards with progress bars and member avatars
+- Individual project detail pages with SVG progress charts
+- Task lists filtered by project
+- Project timeline view
+- Project creation modal
+
+### Settings
+- Profile management
+- Appearance preferences
+- Notification settings
+- About section
+
+## Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js | 16 | React framework with App Router |
+| React | 19 | UI library |
+| TypeScript | 5 | Type safety |
+| Tailwind CSS | 4 | Utility-first styling |
+| date-fns | 4 | Date manipulation |
+| Lucide React | 0.563 | Icon library |
+| clsx | 2 | Conditional class names |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Clone the repository
+git clone https://github.com/cubev/project-manager.git
+cd project-manager
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Create production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── layout.tsx              # Root layout with sidebar + header
+│   ├── page.tsx                # Dashboard
+│   ├── globals.css             # Dark theme + Tailwind config
+│   ├── tasks/
+│   │   └── page.tsx            # Task list + kanban views
+│   ├── calendar/
+│   │   └── page.tsx            # Calendar with monthly/weekly views
+│   ├── projects/
+│   │   ├── page.tsx            # Projects listing
+│   │   └── [id]/page.tsx       # Project detail page
+│   └── settings/
+│       └── page.tsx            # Settings page
+├── components/
+│   ├── Sidebar.tsx             # Collapsible navigation sidebar
+│   ├── Header.tsx              # Top bar with search + notifications
+│   ├── TaskCard.tsx            # Draggable task card
+│   ├── TaskForm.tsx            # Task create/edit modal
+│   ├── TaskDetailPanel.tsx     # Task detail slide-over
+│   ├── CalendarGrid.tsx        # Monthly calendar grid
+│   ├── EventForm.tsx           # Event create/edit modal
+│   ├── MiniCalendar.tsx        # Compact sidebar calendar
+│   └── ProjectForm.tsx         # Project creation modal
+├── store/
+│   ├── taskStore.ts            # Task CRUD + localStorage
+│   ├── calendarStore.ts        # Calendar event CRUD + localStorage
+│   └── projectStore.ts         # Project CRUD + localStorage
+└── types/
+    └── index.ts                # Shared TypeScript types
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Persistence
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All data is persisted to `localStorage` with the following keys:
 
-## Deploy on Vercel
+- `pm-tasks` — Task data
+- `pm-calendar-events` — Calendar events
+- `pm-projects` — Project data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app ships with seed data (10 tasks, 10 calendar events, 5 projects) that loads on first visit.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
